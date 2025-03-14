@@ -18,6 +18,13 @@
 ### Comandos para instalar y configurar Chrony:
 ```bash
 sudo apt install chrony
+```
+```bash
 sudo systemctl enable chrony
+```
+```bash
 sudo systemctl status chrony
+```
+```bash
 sudo systemctl set-timezone America/Mexico-City
+```
