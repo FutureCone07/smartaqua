@@ -11,7 +11,7 @@
 
 ---
 
-## Paso 2: Instalación de Zabbix
+## Paso 2: Instalación de Chrony
 1. Instalar **Chrony**  
    *Chrony es una implementación flexible de NTP (Protocolo de Tiempo de Red) que permite sincronizar el reloj del sistema desde diferentes servidores NTP, relojes de referencia o mediante una entrada manual.*
 
@@ -28,3 +28,26 @@ sudo systemctl status chrony
 ```bash
 sudo systemctl set-timezone America/Mexico-City
 ```
+
+## Paso 3: Instalación de stack LAMP
+1. Instalar **LAMP**
+    *LAMP sirve para que el servidor ubuntu se convierta en una plataforma para alojar aplicaciones web dinámicas*
+     - **L --> LINUX**  
+     - **A --> APACHE**  
+     - **M --> MYSQL**  
+     - **P --> PHP**  
+
+### Comandos para instalar y configurar LAMP
+```bash
+sudo apt install mariadb-server php php-cli php-common php-fpm php-curl php-mysql apache2 curl
+```
+### Configuración de MariaDB
+```bash
+sudo systemctl enable mariadb
+```
+```bash
+sudo systemctl status mariadb
+```
+
+
+---
