@@ -45,9 +45,22 @@ sudo apt install mariadb-server php php-cli php-common php-fpm php-curl php-mysq
 ```bash
 sudo systemctl enable mariadb
 ```
+
 ```bash
 sudo systemctl status mariadb
 ```
+```bash
+sudo systemctl status mariadb
+```
+```bash
+sudo mysql_secure_installation
+```
+### Como Iniciar MariaDB
+```bash
+sudo mysql -u root -p
+```
+
+
 
 
 ---
