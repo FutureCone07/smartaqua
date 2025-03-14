@@ -1,0 +1,19 @@
+//Pasos para la instalación de un servidor en zabbix
+
+Paso 1
+Intalación de Ubuntu Server
+
+-Se busca en la página oficial en link de descarga de ubuntu server https://ubuntu.com/download/server
+
+-Se utiliza una maquina virtual donde se emulara el servidor en este caso se utilizo Oracle VM VirtualBox https://www.virtualbox.org
+  --> Se dan los parámetros que utilizara el servidor (RAM,Almacenamiento,Procesador,etc.)
+
+Paso 2
+Instalación de Zabbix
+
+-Se instala Chrony (Hablamos de Chrony, una implementación flexible de NTP (Protocolo de Tiempo de Red) Se utiliza para sincronizar el reloj del sistema desde diferentes servidores NTP, relojes de referencia o mediante una entrada manual)
+  --> Comandos para instalar y configurar Chrony
+      #  sudo apt install chrony
+      #  sudo systemctl enable chrony
+      #  sudo systemctl status chrony
+      #  sudo systemctl set-timezone America/Mexico-City
