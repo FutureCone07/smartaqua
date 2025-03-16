@@ -29,6 +29,8 @@ sudo systemctl status chrony
 sudo systemctl set-timezone America/Mexico-City
 ```
 
+---
+
 ## Paso 3: Instalación de stack LAMP
 1. Instalar **LAMP**
     *LAMP sirve para que el servidor ubuntu se convierta en una plataforma para alojar aplicaciones web dinámicas*
@@ -41,7 +43,7 @@ sudo systemctl set-timezone America/Mexico-City
 ```bash
 sudo apt install mariadb-server php php-cli php-common php-fpm php-curl php-mysql apache2 curl
 ```
-### Configuración de MariaDB
+1. Configuración de MariaDB
 ```bash
 sudo systemctl enable mariadb
 ```
@@ -55,12 +57,47 @@ sudo systemctl status mariadb
 ```bash
 sudo mysql_secure_installation
 ```
-### Como Iniciar MariaDB
+2. Crear base de datos para Zabbix
 ```bash
 sudo mysql -u root -p
+password
+mysql> create database zabbix character set utf8mb4 collate utf8mb4_bin;
+mysql> create user zabbix@localhost identified by 'password';
+mysql> grant all privileges on zabbix.* to zabbix@localhost;
+mysql> set global log_bin_trust_function_creators = 1;
+mysql> quit;
 ```
 
+3. Configurar el servicio de Apache
+
+```bash
+sudo systemctl enable apache2
+```
+```bash
+sudo systemctl status apache2
+```
+- **Verificamos localización configurada en Ubuntu Server**
+```bash
+locale -a
+```
+
+```bash
+sudo locale-gen en_US.UTF-8
+```
+
+```bash
+sudo update-locale
+```
+- **Modificamos configuración de php**
 
 
+```bash
+sudo nano /etc/php/8.3/cli/php.ini
+```
+Cambiamos las siguientes variables
+memory_limit = 2G
+max_execution_time = 360
+date.timezone = America/Mexico-City (Le quitamos el comentario)
+cgi.fix.pathinfo = 0 (Le quitamos el comentario)
 
 ---
