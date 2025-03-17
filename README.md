@@ -94,6 +94,8 @@ sudo update-locale
 ```bash
 sudo nano /etc/php/8.3/cli/php.ini
 ```
+
+
 Cambiamos las siguientes variables
 memory_limit = 2G
 max_execution_time = 360
