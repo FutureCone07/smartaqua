@@ -96,10 +96,11 @@ sudo nano /etc/php/8.3/cli/php.ini
 ```
 
 
+```ini
 Cambiamos las siguientes variables
 memory_limit = 2G
 max_execution_time = 360
 date.timezone = America/Mexico-City (Le quitamos el comentario)
 cgi.fix.pathinfo = 0 (Le quitamos el comentario)
-
+```
 ---
