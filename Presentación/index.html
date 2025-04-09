@@ -3,56 +3,470 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoreo de Acuaponía con Zabbix</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
+    <title>AquaMonitor Pro - Solución Inteligente para Acuaponía</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body { font-family: 'Montserrat', sans-serif;line-height: 1.5;text-align: justify; margin: 20px; padding: 20px; background-image: url("imagenes/aquaponiaimage.webp"); color: #ffffff;}
-        .container {max-width: 1000px; margin: auto; background: #000000f2 ; padding: 20px; border-radius: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { color: #fbc02d ; font-size: 40px;  text-align: center;}
-        p {color: #fbc02d ; margin-bottom: 100px; padding: 40px; font-size: 25px;}
-        body::before {content: ""; top: 0; position: absolute; left: 0; width: 100%; height: 400%; background-color: rgba(0, 0, 0, 0.3); z-index: -1;}
-        .imagezabbix{background-image: url("imagenes/imagenzab.png");height: 510px; width: auto;}
-        .imagezabbix img{height: auto; max-width: 100%}
-        footer {background-color: #333; color: white; text-align: center; position: fixed; bottom: 0;left: 0; height: 100px;width: 100%; box-sizing: border-box;}
-        footer p {margin: 0; font-size: 15px;}
-
+        :root {
+            --primary: #00c3ff;
+            --secondary: #fbc02d;
+            --dark: #002b36;
+            --light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #002b36 0%, #003847 100%);
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('imagenes/aquaponia-hero.jpg') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 43, 54, 0.7);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Roboto Condensed', sans-serif;
+            margin-top: 0;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin: 10px;
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: var(--secondary);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: url('imagenes/pattern.png') repeat;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 195, 255, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Demo Section */
+        .demo {
+            padding: 80px 0;
+            background: linear-gradient(to right, #002b36 0%, #004052 100%);
+            text-align: center;
+        }
+        
+        .demo-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        
+        .demo-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .demo-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .demo-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 3px solid var(--primary);
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: url('imagenes/pattern-dark.png') repeat;
+        }
+        
+        .pricing-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            background: rgba(0, 195, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 195, 255, 0.3);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--secondary);
+            background: rgba(0, 195, 255, 0.2);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 5px 15px;
+            font-weight: bold;
+            border-radius: 0 0 10px 10px;
+            font-size: 0.8rem;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: var(--secondary);
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: var(--light);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background: #001a21;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                height: auto;
+                padding: 100px 0;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>​🐟​💻Monitoreo de Acuaponía con Zabbix​💻​🐟</h1>
-        <p>
-            Este proyecto busca integrar la tecnología IoT para optimizar un sistema acuapónico, proporcionando un monitoreo en tiempo real mediante Zabbix. 
-            A través de este sistema, se realiza un seguimiento constante de los parámetros clave del ecosistema acuapónico, como la temperatura,
-            el pH y los niveles de oxígeno, entre otros. Cuando se detecta un cambio brusco en cualquiera de estos parámetros, Zabbix genera alertas automáticas,
-            las cuales son enviadas a través de un bot de Telegram. Este bot notifica inmediatamente a los usuarios sobre cualquier evento crítico, como una fluctuación de temperatura,
-            permitiendo una rápida toma de decisiones para mantener la estabilidad del sistema y garantizar el bienestar de los organismos acuáticos.
-        
-        </p>
-        
-        <hr>
-        
-        <h2>✅​ Objetivo ✅​</h2>
-        <p>El objetivo principal de este proyecto es desarrollar e implementar un sistema de monitoreo inteligente para cualquier sistema que utilice tecnologías IoT utilizando Zabbix, con el fin de optimizar el rendimiento del sistema a un bajo costo, 
-            asegurando que todos los parámetros críticos se mantengan dentro de los rangos óptimos. </p>
-        
-        
-        <hr>
-        
-        <h2>⚙️ Funcionamiento ⚙️</h2>
-        <p>Se utilizan sensores inteligentes conectados al sistema acuapónico para medir parámetros clave como temperatura del agua, nivel de pH, oxigenación y nivel de nutrientes,
-            los datos recolectados se visualizan en paneles de control (dashboards) de Zabbix, lo que permite al usuario monitorear fácilmente el estado de los parámetros en cualquier momento.</p>
-            <div class="imagezabbix"></div>
-        
-        
-    </div>
-
-    <footer>
-        <p>&copy; 2025 Angel David Romero Ramos - Quirino Minero Axel Yahir  - Amozoqueño Morales Pedro. Todos los derechos reservados.</p>
-    </footer>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AquaMonitor Pro</h1>
+            <p class="tagline">La solución inteligente para el monitoreo de tus sistemas acuapónicos</p>
+            <div>
+                <a href="#demo" class="btn pulse"><i class="fas fa-eye"></i> Ver demostración</a>
+                <a href="#pricing" class="btn btn-outline"><i class="fas fa-tags"></i> Ver planes</a>
+            </div>
+        </div>
+    </section>
     
-
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>¿Por qué elegir AquaMonitor Pro?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Alertas en tiempo real</h3>
+                    <p>Recibe notificaciones instantáneas en tu teléfono cuando los parámetros críticos salen de su rango óptimo.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Dashboard intuitivo</h3>
+                    <p>Visualiza todos los datos de tu sistema en paneles interactivos con gráficos fáciles de entender.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Ahorro garantizado</h3>
+                    <p>Reduce hasta un 40% las pérdidas por variaciones no detectadas en los parámetros del agua.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+        <div class="container">
+            <h2>Así funciona nuestro sistema</h2>
+            <div class="demo-container">
+                <div class="demo-text">
+                    <h3>Monitoreo 24/7 desde cualquier lugar</h3>
+                    <p>Nuestra plataforma integra sensores de última generación con el poder de Zabbix para ofrecerte un monitoreo continuo de todos los parámetros críticos de tu sistema acuapónico.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Temperatura del agua</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Niveles de pH</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Oxígeno disuelto</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Niveles de nutrientes</li>
+                    </ul>
+                    <a href="#pricing" class="btn"><i class="fas fa-rocket"></i> Comenzar ahora</a>
+                </div>
+                <div class="demo-image">
+                    <img src="imagenes/dashboard-demo.png" alt="Demo del dashboard de AquaMonitor Pro">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2>Planes a tu medida</h2>
+            <div class="pricing-intro">
+                <p>Ofrecemos soluciones flexibles para todo tipo de productores, desde pequeñas instalaciones hasta grandes operaciones comerciales.</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Básico</h3>
+                    <div class="price">$800 <span>licencia única</span></div>
+                    <ul class="pricing-features">
+                        <li>+ $50/mes</li>
+                        <li>Hasta 5 sensores</li>
+                        <li>Alertas básicas</li>
+                        <li>Soporte por email</li>
+                        <li>Dashboard simple</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Seleccionar</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">MÁS POPULAR</div>
+                    <h3>Avanzado</h3>
+                    <div class="price">$1,500 <span>licencia única</span></div>
+                    <ul class="pricing-features">
+                        <li>+ $100/mes</li>
+                        <li>Hasta 15 sensores</li>
+                        <li>Alertas personalizadas</li>
+                        <li>Soporte prioritario</li>
+                        <li>Informes semanales</li>
+                        <li>Integración básica</li>
+                    </ul>
+                    <a href="#" class="btn">Seleccionar</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Empresarial</h3>
+                    <div class="price">$2,500 <span>licencia única</span></div>
+                    <ul class="pricing-features">
+                        <li>+ $200/mes</li>
+                        <li>Sensores ilimitados</li>
+                        <li>Monitoreo 24/7</li>
+                        <li>Soporte inmediato</li>
+                        <li>Informes personalizados</li>
+                        <li>Integración completa</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Seleccionar</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <p>¿Necesitas una solución personalizada? <a href="#" style="color: var(--secondary);">Contáctanos</a> para un plan a tu medida.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>AquaMonitor Pro</h3>
+                <p>La solución definitiva para el monitoreo inteligente de sistemas acuapónicos</p>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                
+                <p>&copy; 2025 AquaMonitor Pro. Todos los derechos reservados.</p>
+                <p>Desarrollado por: Angel David Romero Ramos, Quirino Minero Axel Yahir, Amozoqueño Morales Pedro</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
